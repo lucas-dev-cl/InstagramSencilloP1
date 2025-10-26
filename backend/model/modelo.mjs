@@ -32,7 +32,7 @@ async function crearTablaPost() {
                 id INT AUTO_INCREMENT PRIMARY KEY,
                 description VARCHAR(255),
                 imageUrl VARCHAR(255) UNIQUE,
-                createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+                createdAt DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
                 userId INT NOT NULL,
                 FOREIGN KEY (userId) REFERENCES usuario(id) ON DELETE CASCADE
             )

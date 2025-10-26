@@ -1,13 +1,16 @@
 import express from 'express'
-import {crearUsuario, conseguirTodosLosPostDeUsuario} from '../controller/controller.mjs'
+import {crearUsuario, buscarUsuarios, eliminarUsuario} from '../controller/controller.mjs'
 
 const route = express.Router()
 
-route.post("/crearU", async (req, res) => {
+route.post("/crearUsuario", async (req, res) => {
     try {
         const {nombre, bio, avatarUrl} = req.body
-        await crearUsuario(nombre, bio, avatarUrl)
-        res.status(201).json({"message": "Usuario creado"})
+        const nuevoUsuario = await crearUsuario(nombre, bio, avatarUrl)
+        res.status(201).json({
+            message: "Usuario creado con éxito",
+            usuario: nuevoUsuario
+        })
     } catch (error) {
         res.status(500).json({"messageError": error})
     }
@@ -28,5 +31,45 @@ route.get("/posts/:userId", async (req, res) => {
     }
 })
 
+route.get("/users", async (req, res) => {
+    try {
+        // parametro
+        //const userId = req.params.username
+        const {nombre} = req.query
+        const users = await buscarUsuarios(nombre)
+        res.status(200).json(users)
+    } catch (error) {
+        res.status(500).json({"messageError": error})
+    }    
+})
+
+route.delete("/users/:deleteId", async (req, res) => {
+    try {
+        const userId = req.params.deleteId
+        const usuarioEliminado = await eliminarUsuario(userId)
+
+        res.status(200).json({
+            message: "Usuario eliminado", 
+            usuarioId: usuarioEliminado
+        }) 
+    } catch (error) {
+        res.status(500).json({"messageError": error})
+    }   
+})
+
+route.put("/users/:id", async (req, res) => {
+    try {
+        const userId = req.params.id
+        const { nombre, bio, avatarUrl } = req.body
+
+        await actualizarUsuario(userId, nombre, bio, avatarUrl)
+
+        res.status(200).json({ message: "Usuario actualizado" })
+    } catch (error) {
+        res.status(500).json({ messageError: error })
+    }
+})
+
+export default route
 
 

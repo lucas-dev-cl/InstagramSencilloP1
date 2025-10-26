@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <script src="script.js" defer></script>
+  <title>Buscador de Usuarios</title>
+</head>
+<body>
+
+  <h1>Crear Usuario</h1>
+
+  <form id="formularioCrearUsuario">
+    <label for="nombre">Nombre:</label>
+    <input type="text" id="nombreCrear" name="nombre" placeholder="Escribe un nombre..." required>
+    
+    <label for="bio">Bio:</label>
+    <textarea id="bio" name="bio" placeholder="Escribe una pequeña bio..." required></textarea>
+    
+    <label for="avatarUrl">Avatar URL (opcional):</label>
+    <input type="text" id="avatarUrl" name="avatarUrl" placeholder="https://ejemplo.com/avatar.jpg">
+    
+    <button type="submit">Crear Usuario</button>
+  </form>
+
+  <ul id="resultadoUsuario"></ul>
+
+
+  <h1>Buscador de Usuarios</h1>
+
+  <form id="formularioBuscar">
+    <input type="text" name="nombre" placeholder="Escribe un nombre..." id="nombreBuscar">
+    <button type="submit">Buscar</button>
+  </form>
+
+  <ul id="resultado"></ul>
+
+  <h1>Eliminar usuario</h1>
+
+  <form id="formularioEliminar">
+    <input type="number" name="id" placeholder="Ingrese numero" id="idEliminar">
+    <button type="submit">Eliminar</button>
+  </form>
+
+  <ul id="resultadoEliminar"></ul>  
+</body>
+</html>

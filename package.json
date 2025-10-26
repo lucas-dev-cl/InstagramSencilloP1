@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/lucas-dev-cl/InstagramSencilloP1#readme",
   "dependencies": {
+    "cors": "^2.8.5",
     "mysql2": "^3.15.2",
     "sequelize": "^6.37.7"
   }
