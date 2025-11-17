@@ -1,7 +1,14 @@
 import express from 'express'
-import {crearPost, eliminarPost, conseguirPostUsuario, eliminarPost} from '../controller/controllerPosts.mjs'
+import {crearPost, eliminarPost, conseguirPostUsuario, conseguirPosts} from '../controller/controllerPosts.mjs'
 
 const route = express.Router()
+
+/**
+ * Crear un post nuevo
+ * Método: POST
+ * Ruta: /crearPost
+ * Recibe: description, imageUrl, userId por body (JSON)
+ */
 
 route.post("/crearPost", async (req, res) => {
     try {
@@ -12,9 +19,38 @@ route.post("/crearPost", async (req, res) => {
             post: nuevoPost
         })
     } catch (error) {
-        console.log(`Error al crear post: `, error)
+        res.status(500).json({
+            messageError: "Error al crear el post"
+        })
     }
 })
+
+/**
+ * Obtener posts
+ * Método: GET
+ * Ruta: /post
+ * Query params:
+ *      - description: para buscar por coincidencia
+ *      - limit: cuántos mostrar
+ */
+
+route.get("/post", async (req, res) => {
+    try {
+        const {description, limit} = req.query
+        let limiteSeguro = Number(limit)
+        const posts = await conseguirPosts(description, limiteSeguro)
+        res.status(200).json(posts)
+    } catch (error) {
+        res.status(500).json({"messageError": error})
+    }
+})
+
+/**
+ * Obtener todos los posts de un usuario
+ * Método: GET
+ * Ruta: /post/:id
+ * Param: id → userId
+ */
 
 route.get("/post/:id", async (req, res) => {
     try {
@@ -31,16 +67,28 @@ route.get("/post/:id", async (req, res) => {
     }
 })
 
+/**
+ * Eliminar un post por ID
+ * Método: DELETE
+ * Ruta: /post/:id
+ * Param: id → postId
+ */
+
 route.delete("/post/:id", async (req, res) => {
     try {
         const postId = req.params.id
+        // Llamamos al controlador que elimina el post
         const postEliminado = await eliminarPost(postId) 
-        res.status(200).json({
-            message: "Post eliminado correctamente",
-            post: postEliminado
-        })
 
+        if (!postEliminado) {
+            return res.status(404).json({ error: "No se encontró el post" });
+        }
+
+        // 204 → No Content (perfecto cuando solo eliminás sin devolver datos)
+        res.status(204).send()
     } catch (error) {
         console.log(`Error al eliminar post: `, error)
     }
 })
+
+export default route

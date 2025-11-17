@@ -12,7 +12,7 @@ async function crearTablaUsuario() {
                 avatarURL VARCHAR(255) DEFAULT NULL
             )
         `
-
+        
         // Variable modificada y conectada a la base de datos
         await db.query(query)
         console.log("Tabla 'usuarios' creada")    
@@ -31,7 +31,7 @@ async function crearTablaPost() {
             CREATE TABLE IF NOT EXISTS post (
                 id INT AUTO_INCREMENT PRIMARY KEY,
                 description VARCHAR(255),
-                imageUrl VARCHAR(255) UNIQUE,
+                imageUrl VARCHAR(255),
                 createdAt DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
                 userId INT NOT NULL,
                 FOREIGN KEY (userId) REFERENCES usuario(id) ON DELETE CASCADE

@@ -1,5 +1,6 @@
 import express from 'express'
 import generalRoute from './route/route.mjs'
+import postRoute from './route/routePosts.mjs'
 import cors from 'cors'
 import {initDB} from './config/database.mjs'
 
@@ -16,6 +17,7 @@ app.use(express.json())
 
 // Usar la ruta
 app.use('/api', generalRoute)
+app.use('/api', postRoute)
 
 // Arrancar servidor
 app.listen(PORT, () => {
