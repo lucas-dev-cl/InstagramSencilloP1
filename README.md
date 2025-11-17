@@ -33,6 +33,7 @@ Pendientes / Para mejorar
 - Añadir un sistema de sesiones / autenticación real.
 
 🧪 Objetivo del proyecto
+
 Este proyecto lo hice para practicar:
 - Rutas REST con Express
 - CRUD completo con MySQL
