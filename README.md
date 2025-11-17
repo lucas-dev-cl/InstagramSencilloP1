@@ -4,7 +4,8 @@ Mini Instagram – Proyecto Full Stack
 Este es un proyecto simple inspirado en Instagram, creado para practicar Node.js, Express, MySQL, JavaScript Vanilla, TailwindCSS y organización de un CRUD completo tanto para usuarios como para posts.
 Incluye un backend modularizado y un frontend con formularios funcionales para crear, buscar y eliminar publicaciones.
 
-Características principales
+Características principales: 
+
 👤 Usuarios
 - Crear usuarios con nombre, bio y avatar.
 - Buscar usuarios por nombre o por ID.
@@ -32,7 +33,7 @@ Pendientes / Para mejorar
 - Añadir un sistema de sesiones / autenticación real.
 
 🧪 Objetivo del proyecto
-- Este proyecto lo hice para practicar:
+Este proyecto lo hice para practicar:
 - Rutas REST con Express
 - CRUD completo con MySQL
 - Comunicación frontend ↔ backend usando fetch
